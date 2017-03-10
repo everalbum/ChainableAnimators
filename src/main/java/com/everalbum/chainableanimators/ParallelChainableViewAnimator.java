@@ -10,30 +10,30 @@ import java.util.List;
 
 class ParallelChainableViewAnimator extends ChainableViewAnimator {
     final         List<Animator> inParallel;
-    ParallelChainableViewAnimator(AnimatorSet set, View v, State state) {
-        this(v, state, new ArrayList<Animator>());
+    ParallelChainableViewAnimator(AnimatorSet set, State state, View... v) {
+        this(state, new ArrayList<Animator>(), v);
         inParallel.add(set);
     }
 
-    ParallelChainableViewAnimator(View v, State state, List<Animator> parallel) {
-        super(v, state);
+    ParallelChainableViewAnimator(State state, List<Animator> parallel, View... v) {
+        super(state, v);
         this.inParallel = parallel;
     }
 
     @Override
-    public ChainableViewAnimator then(View v) {
+    public ChainableViewAnimator then(View... v) {
         AnimatorSet parallel = buildParallelAnimatorAndClear();
         state.addSet(parallel);
-        return new ChainableViewAnimator(v, this.state);
+        return new ChainableViewAnimator(this.state, v);
     }
 
     @Override
-    public ChainableViewAnimator inParallelWith(View v) {
+    public ChainableViewAnimator inParallelWith(View... v) {
         if (!animators.isEmpty()) {
             currentAnimator.playTogether(animators);
         }
         inParallel.add(currentAnimator);
-        return new ParallelChainableViewAnimator(v, state, inParallel);
+        return new ParallelChainableViewAnimator(state, inParallel, v);
     }
 
     @Override
@@ -61,6 +61,8 @@ class ParallelChainableViewAnimator extends ChainableViewAnimator {
         startAnimations();
         return this;
     }
+
+
 
     private AnimatorSet buildParallelAnimatorAndClear() {
         if(!animators.isEmpty()) {

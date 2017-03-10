@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChainableViewAnimator extends ChainableAnimator {
-    private       View        view;
+    private       View[]        views;
     final List<Animator> animators = new ArrayList<>();
 
-    ChainableViewAnimator(View v, State state) {
+    ChainableViewAnimator(State state, View... v) {
         super(state);
-        view = v;
+        if(v == null || v.length == 0) {
+            throw new IllegalArgumentException("Require at least one view to be able to animate");
+        }
+        views = v;
     }
 
     @Override
-    public ChainableViewAnimator then(View v) {
+    public ChainableViewAnimator then(View... v) {
         if (!animators.isEmpty()) {
             currentAnimator.playTogether(animators);
         }
@@ -26,7 +29,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
     }
 
     @Override
-    public ChainableViewAnimator inParallelWith(View v) {
+    public ChainableViewAnimator inParallelWith(View... v) {
         if (!animators.isEmpty()) {
             currentAnimator.playTogether(animators);
         }
@@ -87,7 +90,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator x(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "x", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "x", values));
+        }
         return this;
     }
 
@@ -100,7 +105,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator xBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "x", view.getX(), view.getX() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "x", view.getX(), view.getX() + value));
+        }
         return this;
     }
 
@@ -112,7 +119,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator y(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "y", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "y", values));
+        }
         return this;
     }
 
@@ -125,7 +134,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator yBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "y", view.getY(), view.getY() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "y", view.getY(), view.getY() + value));
+        }
         return this;
     }
 
@@ -137,7 +148,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator z(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "z", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "z", values));
+        }
         return this;
     }
 
@@ -150,7 +163,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator zBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "z", view.getZ(), view.getZ() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "z", view.getZ(), view.getZ() + value));
+        }
         return this;
     }
 
@@ -162,7 +177,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotation(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotation", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "rotation", values));
+        }
         return this;
     }
 
@@ -175,7 +192,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotationBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotation", view.getRotation(), view.getRotation() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "rotation",
+                                                 view.getRotation(),
+                                                 view.getRotation() + value));
+        }
         return this;
     }
 
@@ -187,7 +209,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotationX(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotationX", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "rotationX", values));
+        }
         return this;
     }
 
@@ -200,7 +224,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotationXBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotationX", view.getRotationX(), view.getRotationX() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "rotationX",
+                                                 view.getRotationX(),
+                                                 view.getRotationX() + value));
+        }
         return this;
     }
 
@@ -212,7 +241,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotationY(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotationY", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "rotationY", values));
+        }
         return this;
     }
 
@@ -225,7 +256,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator rotationYBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "rotationY", view.getRotationY(), view.getRotationY() + value));
+        for(View view : views) {
+        animators.add(ObjectAnimator.ofFloat(view, "rotationY", view.getRotationY(), view.getRotationY() + value));}
+
         return this;
     }
 
@@ -237,7 +270,13 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationX(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationX", values));
+        for(View view : views) {
+            if (values != null && values.length > 1) {
+                // set the starting value
+                view.setTranslationX(values[0]);
+            }
+            animators.add(ObjectAnimator.ofFloat(view, "translationX", values));
+        }
         return this;
     }
 
@@ -250,7 +289,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationXBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationX", view.getTranslationX(), view.getTranslationX() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "translationX",
+                                                 view.getTranslationX(),
+                                                 view.getTranslationX() + value));
+        }
         return this;
     }
 
@@ -262,7 +306,13 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationY(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationY", values));
+        for(View view : views) {
+            if (values != null && values.length > 1) {
+                // set the starting value
+                view.setTranslationY(values[0]);
+            }
+            animators.add(ObjectAnimator.ofFloat(view, "translationY", values));
+        }
         return this;
     }
 
@@ -275,7 +325,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationYBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationY", view.getTranslationY(), view.getTranslationY() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "translationY",
+                                                 view.getTranslationY(),
+                                                 view.getTranslationY() + value));
+        }
         return this;
     }
 
@@ -287,7 +342,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationZ(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationZ", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "translationZ", values));
+        }
         return this;
     }
 
@@ -300,7 +357,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationZBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "translationZ", view.getTranslationZ(), view.getTranslationZ() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "translationZ",
+                                                 view.getTranslationZ(),
+                                                 view.getTranslationZ() + value));
+        }
         return this;
     }
     /**
@@ -311,7 +373,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator scaleX(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "scaleX", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "scaleX", values));
+        }
         return this;
     }
 
@@ -324,7 +388,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator scaleXBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "scaleX", view.getScaleX(), view.getScaleX() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "scaleX",
+                                                 view.getScaleX(),
+                                                 view.getScaleX() + value));
+        }
         return this;
     }
 
@@ -336,7 +405,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator scaleY(float... values) {
-        animators.add(ObjectAnimator.ofFloat(view, "scaleY", values));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view, "scaleY", values));
+        }
         return this;
     }
 
@@ -349,7 +420,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator scaleYBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "scaleY", view.getScaleX(), view.getScaleY() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "scaleY",
+                                                 view.getScaleX(),
+                                                 view.getScaleY() + value));
+        }
         return this;
     }
 
@@ -361,11 +437,13 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator alpha(float... values) {
-        if(values != null && values.length > 1) {
-            // set the starting alpha
-            view.setAlpha(values[0]);
+        for(View view : views) {
+            if (values != null && values.length > 1) {
+                // set the starting alpha
+                view.setAlpha(values[0]);
+            }
+            animators.add(ObjectAnimator.ofFloat(view, "alpha", values));
         }
-        animators.add(ObjectAnimator.ofFloat(view, "alpha", values));
         return this;
     }
 
@@ -378,7 +456,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator alphaBy(float value) {
-        animators.add(ObjectAnimator.ofFloat(view, "alpha", view.getAlpha(), view.getAlpha() + value));
+        for(View view : views) {
+            animators.add(ObjectAnimator.ofFloat(view,
+                                                 "alpha",
+                                                 view.getAlpha(),
+                                                 view.getAlpha() + value));
+        }
         return this;
     }
 
