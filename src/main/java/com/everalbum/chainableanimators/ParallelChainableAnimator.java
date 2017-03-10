@@ -23,16 +23,16 @@ class ParallelChainableAnimator extends ChainableAnimator {
     }
 
     @Override
-    public ChainableViewAnimator then(View v) {
+    public ChainableViewAnimator then(View... v) {
         AnimatorSet parallel = buildParallelAnimatorAndClear();
         state.addSet(parallel);
-        return new ChainableViewAnimator(v, this.state);
+        return new ChainableViewAnimator(this.state, v);
     }
 
     @Override
-    public ChainableViewAnimator inParallelWith(View v) {
+    public ChainableViewAnimator inParallelWith(View... v) {
         inParallel.add(currentAnimator);
-        return new ParallelChainableViewAnimator(v, state, inParallel);
+        return new ParallelChainableViewAnimator(state, inParallel, v);
     }
 
     @Override
