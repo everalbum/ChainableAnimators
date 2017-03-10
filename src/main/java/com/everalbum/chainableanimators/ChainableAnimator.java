@@ -34,17 +34,17 @@ public class ChainableAnimator implements Cancellable {
         return c;
     }
 
-    public static ChainableViewAnimator with(View v) {
-        return new ChainableViewAnimator(v, new State());
+    public static ChainableViewAnimator with(View... v) {
+        return new ChainableViewAnimator(new State(), v);
     }
 
-    public ChainableViewAnimator then(View v) {
+    public ChainableViewAnimator then(View... v) {
         state.addSet(currentAnimator);
-        return new ChainableViewAnimator(v, this.state);
+        return new ChainableViewAnimator(this.state, v);
     }
 
-    public ChainableViewAnimator inParallelWith(View v) {
-        return new ParallelChainableViewAnimator(currentAnimator, v, this.state);
+    public ChainableViewAnimator inParallelWith(View... v) {
+        return new ParallelChainableViewAnimator(currentAnimator, this.state, v);
     }
 
     public ChainableAnimator then(Animator a) {
@@ -95,6 +95,116 @@ public class ChainableAnimator implements Cancellable {
         return this;
     }
 
+    public ChainableAnimator doOnAnimationEnd(final Runnable r) {
+        currentAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (!isCancelled()) {
+                    r.run();
+                }
+            }
+        });
+        return this;
+    }
+
+    public ChainableAnimator doOnAnimationEndDelayed(final Runnable r, final long delay) {
+        currentAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (!isCancelled()) {
+                    state.delayHandler.postDelayed(r, delay);
+                }
+            }
+        });
+        return this;
+    }
+
+    public ChainableAnimator setOverallDuration(long duration) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.setDuration(duration);
+        return this;
+    }
+
+    public ChainableAnimator setOverallStartDelay(long startDelay) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.setStartDelay(startDelay);
+        return this;
+    }
+
+    public ChainableAnimator setOverallInterpolator(TimeInterpolator interpolator) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.setInterpolator(interpolator);
+        return this;
+    }
+
+    public ChainableAnimator doOnOverallAnimationStart(final Runnable r) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                r.run();
+            }
+        });
+        return this;
+    }
+
+    public ChainableAnimator doOnOverallAnimationCancel(final Runnable r) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                r.run();
+            }
+        });
+        return this;
+    }
+
+    public ChainableAnimator doOnOverallAnimationEnd(final Runnable r) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (!isCancelled()) {
+                    r.run();
+                }
+            }
+        });
+        return this;
+    }
+
+    public ChainableAnimator doOnOverallAnimationEndDelayed(final Runnable r, final long delay) {
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
+        chainedAnimators.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (!isCancelled()) {
+                    state.delayHandler.postDelayed(r, delay);
+                }
+            }
+        });
+        return this;
+    }
+
     public Cancellable start() {
         state.addSet(currentAnimator);
         startAnimations();
@@ -102,7 +212,9 @@ public class ChainableAnimator implements Cancellable {
     }
 
     protected void startAnimations() {
-        chainedAnimators = new AnimatorSet();
+        if(chainedAnimators == null) {
+            chainedAnimators = new AnimatorSet();
+        }
         if (state.animatorSets.size() == 1) {
             chainedAnimators.play(state.animatorSets.get(0));
         } else {
@@ -136,32 +248,6 @@ public class ChainableAnimator implements Cancellable {
     @Override
     public boolean isCancelled() {
         return isCancelled;
-    }
-
-    public ChainableAnimator doOnAnimationEnd(final Runnable r) {
-        currentAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                if (!isCancelled()) {
-                    r.run();
-                }
-            }
-        });
-        return this;
-    }
-
-    public ChainableAnimator doOnAnimationEndDelayed(final Runnable r, final long delay) {
-        currentAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                if (!isCancelled()) {
-                    state.delayHandler.postDelayed(r, delay);
-                }
-            }
-        });
-        return this;
     }
 
     protected static class State {
