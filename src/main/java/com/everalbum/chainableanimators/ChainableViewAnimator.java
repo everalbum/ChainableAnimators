@@ -3,6 +3,8 @@ package com.everalbum.chainableanimators;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -162,6 +164,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @see View#setZ(float)
      * @return This object, allowing calls to methods in this class to be chained.
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator zBy(float value) {
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view, "z", view.getZ(), view.getZ() + value));
@@ -356,6 +359,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @see View#setTranslationZ(float)
      * @return This object, allowing calls to methods in this class to be chained.
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator translationZBy(float value) {
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view,
