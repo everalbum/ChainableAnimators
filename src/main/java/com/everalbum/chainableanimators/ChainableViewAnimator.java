@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -150,6 +151,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator z(float... values) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return this;
+        }
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view, "z", values));
         }
@@ -166,6 +170,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator zBy(float value) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return this;
+        }
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view, "z", view.getZ(), view.getZ() + value));
         }
@@ -345,6 +352,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      */
     public ChainableViewAnimator translationZ(float... values) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return this;
+        }
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view, "translationZ", values));
         }
@@ -361,11 +371,14 @@ public class ChainableViewAnimator extends ChainableAnimator {
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator translationZBy(float value) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return this;
+        }
         for(View view : views) {
             animators.add(ObjectAnimator.ofFloat(view,
                                                  "translationZ",
-                                                 view.getTranslationZ(),
-                                                 view.getTranslationZ() + value));
+                                                 ViewCompat.getTranslationZ(view),
+                                                 ViewCompat.getTranslationZ(view) + value));
         }
         return this;
     }
