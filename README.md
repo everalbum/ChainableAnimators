@@ -57,11 +57,31 @@ ChainableAnimator.with(textView1, textView2)
 
 Phew, my eyes can rest easy now.
 
-## Usage
+## Installing
+
+Add this to your root build.gradle file:
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+and this to your dependencies:
+
+`compile 'com.github.everalbum:ChainableAnimators:v1.0.0'`
+
+### Getting Started
 
 The ChainableAnimator class provides two static entry points to get started:
 1) `ChainableAnimator.with(Animator a)` which takes an existing animator
 2) `ChainableAnimator.with(View... views)` which takes one or more views. If multiple views are supplied, their animations will be played in parallel.
+
+### Animations made easy
+
+ChainableAnimator provides convenient methods for nearly all view properties to make complex animations seem easy. `translationX`, `y`, `alpha`, `rotation`, `scale` and many more, as well as their `By` counterparts (e.g. `rotationBy`) are included by default. There's even support for `z` (or elevation) animations, which work for api > 21 but are no-ops for older versions.
 
 ### Animation Lifecycle Hooks
 
