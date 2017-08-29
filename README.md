@@ -57,7 +57,23 @@ ChainableAnimator.with(textView1, textView2)
 
 Phew, my eyes can rest easy now.
 
-## Usage
+## Installing
+
+Add this to your root build.gradle file:
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+and this to your dependencies:
+
+`compile 'com.github.everalbum:ChainableAnimators:v1.0.0'`
+
+### Getting Started
 
 The ChainableAnimator class provides two static entry points to get started:
 1) `ChainableAnimator.with(Animator a)` which takes an existing animator
