@@ -1,5 +1,7 @@
 # ChainableAnimators
 
+[![](https://jitpack.io/v/everalbum/ChainableAnimators.svg)](https://jitpack.io/#everalbum/ChainableAnimators)
+
 A fluent-api library to make multiple Android animations a breeze. 
 
 ## Problem 
