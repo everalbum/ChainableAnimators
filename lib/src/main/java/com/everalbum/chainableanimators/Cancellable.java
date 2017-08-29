@@ -1,6 +1,7 @@
 package com.everalbum.chainableanimators;
 
-interface Cancellable {
+@SuppressWarnings("WeakerAccess")
+public interface Cancellable {
     boolean isCancelled();
     void cancel();
 }
