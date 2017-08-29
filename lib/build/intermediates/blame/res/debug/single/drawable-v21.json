@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/Fai/Development/ChainableAnimators/lib/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/Fai/.android/build-cache/a60038969bb76c97b6920b4aecbd451b2b9b92a9/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/Fai/Development/ChainableAnimators/lib/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/Fai/.android/build-cache/a60038969bb76c97b6920b4aecbd451b2b9b92a9/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/Fai/Development/ChainableAnimators/lib/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/Fai/.android/build-cache/a60038969bb76c97b6920b4aecbd451b2b9b92a9/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/Fai/Development/ChainableAnimators/lib/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/Fai/.android/build-cache/a60038969bb76c97b6920b4aecbd451b2b9b92a9/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    }
+]
