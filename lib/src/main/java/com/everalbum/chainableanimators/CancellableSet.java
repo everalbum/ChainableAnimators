@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Convenience class that manages multiple {@link Cancellable}'s and cancels them all together.
+ */
 public class CancellableSet implements Cancellable {
 
     List<Cancellable> cancellables = null;

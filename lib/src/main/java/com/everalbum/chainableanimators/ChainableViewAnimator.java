@@ -16,6 +16,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Extension of {@link ChainableAnimator} that allows view properties to be animated and chained.
+ * If multiple views are supplied through {@link ChainableAnimator#with(View...)}, {@link ChainableAnimator#then(View...)}
+ * or {@link ChainableAnimator#inParallelWith(View...)}, then the requested property animations will
+ * be run on all given views in parallel.
+ */
 public class ChainableViewAnimator extends ChainableAnimator {
     private View[] views;
     final List<Animator> animators = new ArrayList<>();
@@ -90,6 +96,13 @@ public class ChainableViewAnimator extends ChainableAnimator {
         return (ChainableViewAnimator) super.doOnAnimationEnd(r);
     }
 
+    /**
+     * Animates the height of the given views to the supplied value, without affecting margins
+     * WARNING: this method may not behave as expected as it directly affects the dimensions of the
+     * views.
+     * @param value height to animate to
+     * @return This object, allowing calls to methods in this class to be chained.
+     */
     public ChainableViewAnimator height(int value) {
         if (value == 0) {
             return height(0, 0, 0);
@@ -98,6 +111,15 @@ public class ChainableViewAnimator extends ChainableAnimator {
         }
     }
 
+    /**
+     * Animates the height of the given views to the supplied value, while taking into account margins.
+     * WARNING: this method may not behave as expected as it directly affects the dimensions of the
+     * views.
+     * @param value height to animate to
+     * @param endTopMargin final top margin
+     * @param endBottomMargin  final bottom margin
+     * @return This object, allowing calls to methods in this class to be chained.
+     */
     public ChainableViewAnimator height(int value, int endTopMargin, int endBottomMargin) {
         if (value < 0) {
             throw new IllegalArgumentException("Target height must be greater than 0.");
@@ -162,6 +184,13 @@ public class ChainableViewAnimator extends ChainableAnimator {
         return this;
     }
 
+    /**
+     * Animates the width of the given views to the supplied value, without affecting margins
+     * WARNING: this method may not behave as expected as it directly affects the dimensions of the
+     * views.
+     * @param value width to animate to
+     * @return This object, allowing calls to methods in this class to be chained.
+     */
     public ChainableViewAnimator width(int value) {
         if (value == 0) {
             return width(0, 0, 0);
@@ -170,6 +199,15 @@ public class ChainableViewAnimator extends ChainableAnimator {
         }
     }
 
+    /**
+     * Animates the width of the given views to the supplied value, while taking into account margins.
+     * WARNING: this method may not behave as expected as it directly affects the dimensions of the
+     * views.
+     * @param value height to animate to
+     * @param endStartMargin final start margin
+     * @param endEndMargin  final end margin
+     * @return This object, allowing calls to methods in this class to be chained.
+     */
     public ChainableViewAnimator width(int value, int endStartMargin, final int endEndMargin) {
         if (value < 0) {
             throw new IllegalArgumentException("Target height must be greater than 0.");
@@ -242,8 +280,8 @@ public class ChainableViewAnimator extends ChainableAnimator {
     }
 
     /**
-     * This method will cause the View's <code>x</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * This method will cause the Views' <code>x</code> property to be animated to the
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setX(float)
@@ -257,7 +295,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>x</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -272,7 +310,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>y</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setY(float)
@@ -286,7 +324,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>y</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -301,11 +339,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>z</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value. This method will do nothing on api < 21.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setZ(float)
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator z(float... values) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -318,7 +357,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>z</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value. This method will do nothing on api < 21.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -337,7 +376,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotation</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotation(float)
@@ -351,7 +390,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotation</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -369,7 +408,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotationX</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotationX(float)
@@ -383,7 +422,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotationX</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -401,7 +440,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotationY</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotationY(float)
@@ -415,7 +454,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>rotationY</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -434,7 +473,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationX</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationX(float)
@@ -452,7 +491,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationX</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -470,7 +509,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationY</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationY(float)
@@ -488,7 +527,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationY</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -506,11 +545,12 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationZ</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value. This method will do nothing on api < 21.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationZ(float)
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator translationZ(float... values) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -523,7 +563,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationZ</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value. This method will do nothing on api < 21.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -545,7 +585,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>scaleX</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setScaleX(float)
@@ -559,7 +599,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>scaleX</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -577,7 +617,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>scaleY</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setScaleY(float)
@@ -591,7 +631,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>scaleY</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -609,7 +649,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>alpha</code> property to be animated to the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setAlpha(float)
@@ -627,7 +667,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>alpha</code> property to be animated by the
-     * specified value. Animations already running on the property will be canceled.
+     * specified value.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
