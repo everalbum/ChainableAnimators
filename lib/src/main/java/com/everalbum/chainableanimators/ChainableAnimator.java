@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Allows chaining of multiple complex animations using a fluent-api:
- * <p><pre>
+ * <pre>
  *     ChainableAnimator.with(textView1, textView2)
                          .alpha(0, 1)
                          .translationX(0, 100)
@@ -23,7 +23,7 @@ import java.util.List;
                          .translationY(0, 100)
                          .alpha(0, 1)
                          .start();
- * </pre></p>
+ * </pre><
  */
 public class ChainableAnimator implements Cancellable {
     AnimatorSet chainedAnimators;

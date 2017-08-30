@@ -283,6 +283,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the Views' <code>x</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setX(float)
      */
@@ -312,6 +313,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>y</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setY(float)
      */
@@ -339,8 +341,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>z</code> property to be animated to the
-     * specified value. This method will do nothing on api < 21.
+     * specified value. This method will do nothing on api &lt; 21.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setZ(float)
      */
@@ -357,7 +360,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>z</code> property to be animated by the
-     * specified value. This method will do nothing on api < 21.
+     * specified value. This method will do nothing on api &lt; 21.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -378,6 +381,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>rotation</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotation(float)
      */
@@ -410,6 +414,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>rotationX</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotationX(float)
      */
@@ -442,6 +447,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>rotationY</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setRotationY(float)
      */
@@ -475,6 +481,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>translationX</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationX(float)
      */
@@ -511,6 +518,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>translationY</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationY(float)
      */
@@ -545,8 +553,9 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationZ</code> property to be animated to the
-     * specified value. This method will do nothing on api < 21.
+     * specified value. This method will do nothing on api &lt; 21.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationZ(float)
      */
@@ -563,7 +572,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
 
     /**
      * This method will cause the View's <code>translationZ</code> property to be animated by the
-     * specified value. This method will do nothing on api < 21.
+     * specified value. This method will do nothing on api &lt; 21.
      *
      * @param value The amount to be animated by, as an offset from the current value.
      * @return This object, allowing calls to methods in this class to be chained.
@@ -587,6 +596,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>scaleX</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setScaleX(float)
      */
@@ -619,6 +629,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>scaleY</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setScaleY(float)
      */
