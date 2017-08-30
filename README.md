@@ -62,18 +62,18 @@ Phew, my eyes can rest easy now.
 ## Installing
 
 Add this to your root build.gradle file:
-```
+```groovy
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 
 and this to your dependencies:
 
-`compile 'com.github.everalbum:ChainableAnimators:v1.0.0'`
+`compile 'com.github.everalbum:ChainableAnimators:1.0.6'`
 
 ### Getting Started
 
