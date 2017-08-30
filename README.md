@@ -73,7 +73,7 @@ allprojects {
 
 and this to your dependencies:
 
-`compile 'com.github.everalbum:ChainableAnimators:1.0.6'`
+`compile 'com.github.everalbum:ChainableAnimators:1.0.7'`
 
 ### Getting Started
 

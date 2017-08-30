@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -347,7 +346,6 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setZ(float)
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator z(float... values) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -366,7 +364,6 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setZ(float)
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator zBy(float value) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -559,7 +556,6 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationZ(float)
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator translationZ(float... values) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -578,7 +574,6 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setTranslationZ(float)
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChainableViewAnimator translationZBy(float value) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return this;
@@ -662,6 +657,7 @@ public class ChainableViewAnimator extends ChainableAnimator {
      * This method will cause the View's <code>alpha</code> property to be animated to the
      * specified value.
      *
+     * @param values A set of values that the animation will animate between over time.
      * @return This object, allowing calls to methods in this class to be chained.
      * @see View#setAlpha(float)
      */

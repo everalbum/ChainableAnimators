@@ -23,7 +23,7 @@ import java.util.List;
                          .translationY(0, 100)
                          .alpha(0, 1)
                          .start();
- * </pre><
+ * </pre>
  */
 public class ChainableAnimator implements Cancellable {
     AnimatorSet chainedAnimators;
